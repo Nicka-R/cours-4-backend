@@ -9,16 +9,21 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Faker\Factory;
+use App\Entity\Personne;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[AsCommand(
     name: 'app:add-data',
-    description: 'Add a short description for your command',
+    description: 'Commande qui ajoute des données à la base de données',
 )]
 class AddDataCommand extends Command
 {
-    public function __construct()
+    private $entityManager;
+    public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
+        $this->entityManager = $entityManager;
     }
 
     protected function configure(): void
@@ -29,20 +34,23 @@ class AddDataCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+   protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $faker = Factory::create('fr_FR');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
+        for ($i = 0; $i < 10; $i++) {
+            $personne = new Personne();
+            $personne->setName($faker->lastName);
+            $personne->setPrenom($faker->FirstName);
+            $personne->setAge($faker->numberBetween(1, 70));
+
+            $this->entityManager->persist($personne);
         }
 
-        if ($input->getOption('option1')) {
-            // ...
-        }
+        $this->entityManager->flush();
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('10 Persons records have been added to the database.');
 
         return Command::SUCCESS;
     }
