@@ -15,29 +15,51 @@ class TinyPuppyRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TinyPuppy::class);
     }
+    
+    /**
+     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     */
+    public function findByName(string $name): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.name = :name')
+            ->setParameter('name', $name)
+            ->orderBy('t.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-    //    /**
-    //     * @return TinyPuppy[] Returns an array of TinyPuppy objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
 
-    //    public function findOneBySomeField($value): ?TinyPuppy
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     */
+    public function findByAge(int $age): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.age = :age')
+            ->setParameter('age', $age)
+            ->orderBy('t.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     */
+    public function findByNameAndAge(string $name, int $age): array
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.name = :name')
+            ->andWhere('t.age = :age')
+            ->setParameter('name', $name)
+            ->setParameter('age', $age)
+            ->orderBy('t.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
 }
