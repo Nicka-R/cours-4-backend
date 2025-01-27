@@ -16,11 +16,18 @@ class Personne
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
+
     #[ORM\Column]
     private ?int $age = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
+    public function __construct(string $name, string $prenom, int $age)
+    {
+        $this->name = $name;
+        $this->prenom = $prenom;
+        $this->age = $age;
+    }
 
     public function getId(): ?int
     {
