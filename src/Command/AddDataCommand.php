@@ -43,7 +43,7 @@ class AddDataCommand extends Command
             $personne = new Personne();
             $personne->setName($faker->lastName);
             $personne->setPrenom($faker->FirstName);
-            $personne->setAge($faker->numberBetween(1, 70));
+            $personne->setAge($faker->numberBetween(18, 70));
 
             $this->entityManager->persist($personne);
         }
