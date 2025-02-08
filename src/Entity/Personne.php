@@ -76,7 +76,7 @@ class Personne
         return $this;
     }
 
-        public function getBatiment(): ?Batiment
+    public function getBatiment(): ?Batiment
     {
         return $this->batiment;
     }

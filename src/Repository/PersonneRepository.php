@@ -60,5 +60,4 @@ class PersonneRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
 }
