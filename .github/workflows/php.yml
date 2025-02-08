@@ -26,12 +26,6 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Drop schema
-        run: php bin/console doctrine:schema:drop --force --env=test
-
-      - name: Drop database
-        run: php bin/console doctrine:database:drop --force --env=test
-
       - name: Create database
         run: php bin/console doctrine:database:create --env=test
 
