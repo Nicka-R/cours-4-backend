@@ -34,7 +34,7 @@ class AddDataCommand extends Command
         ;
     }
 
-   protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $faker = Factory::create('fr_FR');
