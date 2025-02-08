@@ -22,6 +22,11 @@ class Personne
     #[ORM\Column]
     private ?int $age = null;
 
+    #[ORM\ManyToOne(targetEntity: Batiment::class, inversedBy: 'personnes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $batiment;
+
+
     public function __construct(string $name = null, string $prenom = null, int $age = null)
     {
         $this->name = $name;
