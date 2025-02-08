@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\BatimentRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BatimentRepository::class)]
 class Batiment
@@ -21,8 +21,16 @@ class Batiment
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
 
-    #[ORM\OneToMany( targetEntity: Personne::class, mappedBy: 'batiment')]
+    /**
+     * @var Collection<int, Personne>
+     */
+    #[ORM\OneToMany(mappedBy: 'batiment', targetEntity: Personne::class)]
     private Collection $personnes;
+
+    public function __construct()
+    {
+        $this->personnes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,7 +62,7 @@ class Batiment
     }
 
     /**
-     * @return Collection|Personne[]
+     * @return Collection<int, Personne>
      */
     public function getPersonnes(): Collection
     {
