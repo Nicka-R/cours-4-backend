@@ -12,25 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-    - name: Run Test suite
-      run: composer run-script test
+      - name: Create database
+        run: php bin/console doctrine:database:create --env=test
 
-    - name: Run PHPStan
-      run: composer run-script phpstan
+      - name: Run migrations
+        run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
-    - name: Run PHPCS
-      run: composer run-script phpcs
+      - name: Run Test suite
+        run: composer run-script test
+
+      - name: Run PHPStan
+        run: composer run-script phpstan
+
+      - name: Run PHPCS
+        run: composer run-script phpcs
