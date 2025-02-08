@@ -23,7 +23,7 @@ class Personne
     private ?int $age = null;
 
     #[ORM\ManyToOne(targetEntity: Batiment::class, inversedBy: 'personnes')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $batiment;
 
 
@@ -71,6 +71,18 @@ class Personne
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+        public function getBatiment(): ?Batiment
+    {
+        return $this->batiment;
+    }
+
+    public function setBatiment(?Batiment $batiment): self
+    {
+        $this->batiment = $batiment;
 
         return $this;
     }

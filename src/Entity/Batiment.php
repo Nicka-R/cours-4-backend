@@ -51,4 +51,33 @@ class Batiment
 
         return $this;
     }
+
+    /**
+     * @return Collection|Personne[]
+     */
+    public function getPersonnes(): Collection
+    {
+        return $this->personnes;
+    }
+
+    public function addPersonne(Personne $personne): self
+    {
+        if (!$this->personnes->contains($personne)) {
+            $this->personnes[] = $personne;
+            $personne->setBatiment($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonne(Personne $personne): self
+    {
+        if ($this->personnes->removeElement($personne)) {
+            if ($personne->getBatiment() === $this) {
+                $personne->setBatiment(null);
+            }
+        }
+
+        return $this;
+    }
 }
