@@ -14,9 +14,9 @@ class PersonneTest extends TestCase
     {
         $this->personne = new Personne('Ratovobodo', 'Nicka', 20);
     }
-    public function testGetName(): void
+    public function testGetNom(): void
     {
-        $this->assertEquals('Ratovobodo', $this->personne->getName());
+        $this->assertEquals('Ratovobodo', $this->personne->getNom());
     }
 
     public function testGetPrenom(): void
