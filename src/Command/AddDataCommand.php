@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 )]
 class AddDataCommand extends Command
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
@@ -42,7 +42,7 @@ class AddDataCommand extends Command
         for ($i = 0; $i < 10; $i++) {
             $personne = new Personne();
             $personne->setName($faker->lastName);
-            $personne->setPrenom($faker->FirstName);
+            $personne->setPrenom($faker->firstName);
             $personne->setAge($faker->numberBetween(18, 70));
 
             $this->entityManager->persist($personne);

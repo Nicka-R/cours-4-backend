@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class PersonneTest extends TestCase
 {
 
-    private $personne;
+    private Personne $personne;
     //before each test
     protected function setUp(): void
     {

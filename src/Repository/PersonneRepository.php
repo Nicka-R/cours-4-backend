@@ -17,7 +17,7 @@ class PersonneRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     * @return Personne[] Returns an array of Personne objects
      */
     public function findByName(string $name): array
     {
@@ -32,7 +32,7 @@ class PersonneRepository extends ServiceEntityRepository
 
 
     /**
-     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     * @return Personne[] Returns an array of Personne objects
      */
     public function findByAge(int $age): array
     {
@@ -46,7 +46,7 @@ class PersonneRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return TinyPuppy[] Returns an array of TinyPuppy objects
+     * @return Personne[] Returns an array of Personne objects
      */
     public function findByNameAndAge(string $name, int $age): array
     {

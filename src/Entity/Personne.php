@@ -22,7 +22,7 @@ class Personne
     #[ORM\Column]
     private ?int $age = null;
 
-    public function __construct(string $name, string $prenom, int $age)
+    public function __construct(string $name = null, string $prenom = null, int $age = null)
     {
         $this->name = $name;
         $this->prenom = $prenom;
