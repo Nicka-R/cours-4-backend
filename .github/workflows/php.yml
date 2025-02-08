@@ -27,6 +27,9 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Drop database
+        run: php bin/console doctrine:schema:drop --force --env=test
+
+      - name: Drop database
         run: php bin/console doctrine:database:drop --force --env=test
 
       - name: Create database
