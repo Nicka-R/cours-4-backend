@@ -22,7 +22,7 @@ Listes des points attendu:
 - [x] Créer au moins un controller avec sa vue twig
 - [x] Créer une commande qui ajoute des données en BDD
 - [x] script bash qui execute tout les tests (dans le conteneur `./run_tests.sh`)
-- [ ] Ajouter un Github Action qui execute les tests
+- [x] Ajouter un Github Action qui execute les tests
 
 Listes des points bonus
 

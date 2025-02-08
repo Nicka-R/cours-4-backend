@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Faker\Factory;
 use App\Entity\Personne;
+use App\Entity\Batiment;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[AsCommand(
@@ -39,18 +40,29 @@ class AddDataCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++) {
-            $personne = new Personne();
-            $personne->setName($faker->lastName);
-            $personne->setPrenom($faker->firstName);
-            $personne->setAge($faker->numberBetween(18, 70));
+        // Créer des bâtiments
+        for ($i = 0; $i < 3; $i++) {
+            $batiment = new Batiment();
+            $batiment->setNom($faker->company);
+            $batiment->setAdresse($faker->address);
 
-            $this->entityManager->persist($personne);
+            $this->entityManager->persist($batiment);
+
+            // Créer des personnes et les lier au bâtiment
+            for ($j = 0; $j < 10; $j++) {
+                $personne = new Personne();
+                $personne->setNom($faker->lastName);
+                $personne->setPrenom($faker->firstName);
+                $personne->setAge($faker->numberBetween(18, 70));
+                $personne->setBatiment($batiment);
+
+                $this->entityManager->persist($personne);
+            }
         }
 
         $this->entityManager->flush();
 
-        $io->success('10 Persons records have been added to the database.');
+        $io->success('30 Persons records have been added to the database.');
 
         return Command::SUCCESS;
     }

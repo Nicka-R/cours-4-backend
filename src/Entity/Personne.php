@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Batiment;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
 class Personne
@@ -14,7 +15,7 @@ class Personne
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     private ?string $prenom = null;
@@ -22,9 +23,14 @@ class Personne
     #[ORM\Column]
     private ?int $age = null;
 
-    public function __construct(string $name = null, string $prenom = null, int $age = null)
+    #[ORM\ManyToOne(targetEntity: Batiment::class, inversedBy: 'personnes')]
+    #[ORM\JoinColumn(nullable: true)]
+    private Batiment $batiment;
+
+
+    public function __construct(string $nom = null, string $prenom = null, int $age = null)
     {
-        $this->name = $name;
+        $this->nom = $nom;
         $this->prenom = $prenom;
         $this->age = $age;
     }
@@ -34,14 +40,14 @@ class Personne
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getnom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): static
+    public function setnom(string $nom): static
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -66,6 +72,18 @@ class Personne
     public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getBatiment(): ?Batiment
+    {
+        return $this->batiment;
+    }
+
+    public function setBatiment(?Batiment $batiment): self
+    {
+        $this->batiment = $batiment;
 
         return $this;
     }

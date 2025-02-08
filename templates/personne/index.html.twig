@@ -13,7 +13,7 @@
     Liste des personnes:
     <ul>
         {% for personne in personnes %}
-            <li>{{ personne.name }} {{ personne.prenom }}, {{ personne.age }} ans</li>
+            <li>{{ personne.nom }} {{ personne.prenom }}, {{ personne.age }} ans</li>
         {% else %}
             <li>Aucune personne trouvée.</li>
         {% endfor %}
