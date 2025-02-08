@@ -19,7 +19,7 @@ class BatimentRepository extends ServiceEntityRepository
     /**
     * @return Batiment Returns a Batiment object
     */
-    public function findOneByName($value): ?Batiment
+    public function findOneByName(string $value): ?Batiment
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.nom = :val')
@@ -32,7 +32,7 @@ class BatimentRepository extends ServiceEntityRepository
     /**
      * @return Batiment Returns a Batiment object
     */
-    public function findOneByAdresse($value): ?Batiment
+    public function findOneByAdresse(string $value): ?Batiment
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.adresse = :val')

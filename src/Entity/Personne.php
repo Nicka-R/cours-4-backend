@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Batiment;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
 class Personne
@@ -24,7 +25,7 @@ class Personne
 
     #[ORM\ManyToOne(targetEntity: Batiment::class, inversedBy: 'personnes')]
     #[ORM\JoinColumn(nullable: true)]
-    private $batiment;
+    private Batiment $batiment;
 
 
     public function __construct(string $nom = null, string $prenom = null, int $age = null)

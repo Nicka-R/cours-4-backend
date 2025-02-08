@@ -43,15 +43,15 @@ class AddDataCommand extends Command
         // Créer des bâtiments
         for ($i = 0; $i < 3; $i++) {
             $batiment = new Batiment();
-            $batiment->setName($faker->company);
-            $batiment->setAddress($faker->address);
+            $batiment->setNom($faker->company);
+            $batiment->setAdresse($faker->address);
 
             $this->entityManager->persist($batiment);
 
             // Créer des personnes et les lier au bâtiment
             for ($j = 0; $j < 10; $j++) {
                 $personne = new Personne();
-                $personne->setName($faker->lastName);
+                $personne->setNom($faker->lastName);
                 $personne->setPrenom($faker->firstName);
                 $personne->setAge($faker->numberBetween(18, 70));
                 $personne->setBatiment($batiment);
